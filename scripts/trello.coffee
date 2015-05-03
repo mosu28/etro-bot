@@ -9,4 +9,3 @@ module.exports = (robot) ->
 				msg.send "ERROR"
 				return
 			msg.send "「#{title}」をTrelloに保存しました。"
-			
