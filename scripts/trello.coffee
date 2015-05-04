@@ -21,6 +21,7 @@ module.exports = (robot) ->
 				return
 			for i in [0..data.length - 1]
 				if listName == data[i].name
+					msg.send "test"
 					t.get "/1/lists/#{data[i].id}/cards", (err, data) ->
 						if err
 							msg.send "ERROR"
