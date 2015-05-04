@@ -8,6 +8,7 @@ module.exports = (robot) ->
 			if err
 				msg.send "ERROR"
 				return
+			msg.send "#{data}"
 			msg.send "「#{title}」をTrelloに保存しました。"
 	#get listでリストを取得する
 	robot.hear /^etro-bot get list/, (msg) ->
