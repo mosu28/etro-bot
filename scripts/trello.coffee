@@ -13,7 +13,7 @@ module.exports = (robot) ->
 	robot.hear /^etro-bot get list/, (msg) ->
 		Trello = require("node-trello")
 		t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN)
-		t.get "/1/boards", {idBoard: process.env.HUBOT_TRELLO_BOARD}, (err, data) ->
+		t.get "/1/boards/{process.env.HUBOT_TRELLO_BOARD}", (err, data) ->
 			if err
 				msg.send "ERROR"
 				return
