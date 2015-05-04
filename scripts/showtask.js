@@ -8,7 +8,6 @@ var Trello = require("node-trello");
 var _ = require("underscore");
 
 function showTasks (t, msg, list_id) {
-	msg.send("test");
 	t.get("/1/lists/" + list_id + "/cards", function (err, data) {
 		if (err) {
 			msg.send("ERROR");
@@ -24,15 +23,13 @@ function mainProcess (msg) {
 	var listName = msg.match[1];
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
 	t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
-		if (err) {
+		var found = _.find(data, function (datum) {return datum.name == listName});
+		if (err || !found) {
 			msg.send("ERROR");
 			return;
+		} else {
+			showTasks(t, msg, found.id);
 		}
-		_.each(data, function (datum) {
-			if (listName === datum.name) {
-				showTasks(t, msg, datum.id);
-			}
-		});
 	});
 }
 
