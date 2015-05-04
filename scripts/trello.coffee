@@ -26,9 +26,9 @@ module.exports = (robot) ->
 							msg.send "ERROR"
 							return
 						for j in [0, data.length - 1]
-							msg.send data[i].name
-							return
-			msg.send "#{listName}は存在していません。"
+							msg.send data[j].name
+						return
+			# msg.send "#{listName}は存在していません。"
 
 
 	# robot.hear /test/, (msg) ->
