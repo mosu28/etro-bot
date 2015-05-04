@@ -17,7 +17,7 @@ module.exports = (robot) ->
 			if err
 				msg.send "ERROT"
 				return
-			for i in [0..data.length]
+			for i in [0..data.length - 1]
 				msg.send "id:#{data[i].id} name:#{data[i].name}"
 
 	# robot.hear /test/, (msg) ->
