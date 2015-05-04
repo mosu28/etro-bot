@@ -12,7 +12,7 @@ module.exports = (robot) ->
 	#get listでリストを取得する
 	robot.hear /^etro-bot get list/, (msg) ->
 		t.get "/1/board", {idBoard: process.env.HUBOT_TRELLO_BOARD}, (err, data) ->
-			if err
-				msg.send "ERROR"
-				return
+#			if err
+#				msg.send "ERROR"
+#				return
 			msg.send "#{data}"
