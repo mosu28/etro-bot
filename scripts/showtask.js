@@ -15,11 +15,13 @@ function mainProcess (msg) {
 			msg.send("ERROR");
 			return;
 		}
+		var l = [];
 		_.each(data, function (datum) {
-			list.push(datum.name);
+			l.push(datum.name);
 		});
+		return l;
 	});
-	msg.send(list + "");
+	msg.send(list);
 }
 
 module.exports = function (robot) {
