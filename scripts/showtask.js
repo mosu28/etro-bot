@@ -8,6 +8,7 @@ var Trello = require("node-trello");
 var _ = require("underscore");
 
 function showTasks (t, list_id) {
+	msg.send(list_id);
 	t.get("/1/lists/" + list_id + "/cards", function (err, data) {
 		if (err) {
 			msg.send("ERROR");
@@ -37,7 +38,6 @@ function mainProcess (msg) {
 
 module.exports = function (robot) {
 	robot.respond(/show (.*)/i, function (msg) {
-		msg.send(msg.match[1]);
 		mainProcess(msg);
 	});
 }
