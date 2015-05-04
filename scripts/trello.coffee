@@ -20,10 +20,8 @@ module.exports = (robot) ->
 		if lists == "ERROR"
 			msg.send "ERROR"
 		else
-			for list in lists
-				msg.send "#{list.name}"
+			msg.send lists
 
-	# robot.hear /^etro-bot test/, (msg) ->
-	# 	iss = [0, 1, 2, 3, 4]
-	# 	for i in iss
-	# 		msg.send i
+	# robot.hear /test/, (msg) ->
+	# 	obj = {name: "test"}
+	# 	msg.send obj.name
