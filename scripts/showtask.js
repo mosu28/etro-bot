@@ -20,15 +20,13 @@ function getList (err, data) {
 }
 
 function mainProcess (msg) {
-	// var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
-	// var list = t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", getList(err, data));
-	// msg.send(list);
-	return msg.send("test");
+	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
+	var list = t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", getList(err, data));
+	return msg.send(list);
 }
 
 module.exports = function (robot) {
 	robot.respond(/show/i, function (msg) {
-		// mainProcess(msg);
-		msg.send("test");
+		mainProcess(msg);
 	});
 }
