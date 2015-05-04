@@ -28,6 +28,7 @@ function mainProcess (msg) {
 			msg.send("ERROR");
 			return;
 		} else {
+			msg.send(listName + "のタスクリスト");
 			showTasks(t, msg, found.id);
 		}
 	});
