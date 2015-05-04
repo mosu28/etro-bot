@@ -8,7 +8,7 @@ var Trello = require("node-trello");
 var _ = require("underscore");
 
 function showTasks (t, list_id) {
-	msg.send(list_id);
+	msg.send("test");
 	t.get("/1/lists/" + list_id + "/cards", function (err, data) {
 		if (err) {
 			msg.send("ERROR");
@@ -30,7 +30,6 @@ function mainProcess (msg) {
 		}
 		_.each(data, function (datum) {
 			if (listName === datum.name) {
-				msg.send(datum.id);
 				showTasks(t, datum.id);
 			}
 		});
