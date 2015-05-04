@@ -7,25 +7,36 @@
 var Trello = require("node-trello");
 var _ = require("underscore");
 
-function mainProcess (msg) {
-	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
-	var list;
-	msg.send(t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
+function showTasks (t, list_id) {
+	t.get("/1/lists/" + list_id + "/cards", function (err, data) {
 		if (err) {
 			msg.send("ERROR");
 			return;
 		}
-		var l = [];
 		_.each(data, function (datum) {
-			l.push(datum.name);
+			msg.send(datum.name);
 		});
-		return l;
-	}));
-	// msg.send(list);
+	});
+}
+
+function mainProcess (msg) {
+	var listName = msg.match[1];
+	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
+	t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
+		if (err) {
+			msg.send("ERROR");
+			return;
+		}
+		_.each(data, function (datum) {
+			if (listName === datum.name) {
+				showTasks(t, datum.id);
+			}
+		});
+	});
 }
 
 module.exports = function (robot) {
-	robot.respond(/show/i, function (msg) {
+	robot.respond(/show (.*)/i, function (msg) {
 		mainProcess(msg);
 	});
 }
