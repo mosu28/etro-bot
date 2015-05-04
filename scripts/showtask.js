@@ -7,7 +7,7 @@
 var Trello = require("node-trello");
 var _ = require("underscore");
 
-function showTasks (t, list_id) {
+var showTasks = function (t, list_id) {
 	msg.send("test");
 	t.get("/1/lists/" + list_id + "/cards", function (err, data) {
 		if (err) {
