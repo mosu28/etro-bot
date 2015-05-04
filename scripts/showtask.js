@@ -25,7 +25,7 @@ function mainProcess (msg) {
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
 	t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
 		var found = _.find(data, function (datum) {
-			msg.send(_s(datum.name).trim() + ", " + _s(listName).trim());
+			msg.send(_s(datum.name).trim().value() + ", " + _s(listName).trim().value());
 			return _s(datum.name).trim() === _s(listName).trim()
 		});
 		if (err || !found) {
