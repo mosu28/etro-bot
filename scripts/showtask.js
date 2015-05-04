@@ -15,9 +15,9 @@ function mainProcess (msg) {
 			msg.send("ERROR");
 			return;
 		}
-		msg.send("test");
+		msg.send(data);
 		_.each(data, function (datum) {
-			list += datum.name;
+			list += datum.name + " ";
 		});
 	});
 	msg.send(list);
