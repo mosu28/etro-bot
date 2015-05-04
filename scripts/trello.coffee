@@ -11,7 +11,7 @@ module.exports = (robot) ->
 			msg.send "「#{title}」をTrelloに保存しました。"
 	#get リスト名 でリストのタスクをすべて表示する
 	robot.hear /^etro-bot get list/, (msg) ->
-		lists = ""
+		global.lists = ""
 		Trello = require("node-trello")
 		t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN)
 		#list名とIDの取得
@@ -20,8 +20,8 @@ module.exports = (robot) ->
 				msg.send "ERROT"
 				return
 			for i in [0..data.length - 1]
-				lists += "#{data[i].name}"
-		msg.send lists
+				global.lists += "#{data[i].name}"
+		msg.send global.lists
 
 	# robot.hear /test/, (msg) ->
 	# 	objs = [{name: "test"}, {name: "test1"}, {name: "test3"}]
