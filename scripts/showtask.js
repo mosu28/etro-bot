@@ -6,7 +6,6 @@
 
 var Trello = require("node-trello");
 var _ = require("underscore");
-var _s = require("underscore.string");
 
 function showTasks (t, msg, list_id) {
 	t.get("/1/lists/" + list_id + "/cards", function (err, data) {
@@ -25,11 +24,16 @@ function mainProcess (msg) {
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
 	t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
 		var found = _.find(data, function (datum) {
-			return _s(datum.name).trim().titleize().value() === _s(listName).trim().titleize().value();
+			return datum.name === listName;
 		});
-		if (err || !found) {
+		if (err) {
 			msg.send("ERROR");
 			return;
+		} else if (!found) {
+			msg.send("「" + listName + "」は存在しません。以下のリスト名のいずれかを入力してください。");
+			_.each (data, function (datum) {
+				msg.send(datum.name);
+			});
 		} else {
 			msg.send("～ " + listName + "のタスクリスト ～");
 			showTasks(t, msg, found.id);
