@@ -20,7 +20,7 @@ module.exports = (robot) ->
 				msg.send "ERROT"
 				return
 			for i in [0..data.lenght - 1]
-				msg.send "#{data[i].name}\n"
+				msg.send "#{data[i].name}"
 		msg.send lists
 
 	# robot.hear /test/, (msg) ->
