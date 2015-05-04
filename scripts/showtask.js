@@ -37,6 +37,7 @@ function mainProcess (msg) {
 
 module.exports = function (robot) {
 	robot.respond(/show (.*)/i, function (msg) {
+		msg.send(msg.match[1]);
 		mainProcess(msg);
 	});
 }
