@@ -30,7 +30,7 @@ function mainProcess (msg) {
 		}
 		_.each(data, function (datum) {
 			if (listName === datum.name) {
-				msg.send("test");
+				msg.send(datum.id);
 				showTasks(t, datum.id);
 			}
 		});
