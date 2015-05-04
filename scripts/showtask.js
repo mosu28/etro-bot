@@ -6,6 +6,7 @@
 
 var Trello = require("node-trello");
 var _ = require("underscore");
+var _s = require("underscore.string");
 
 function showTasks (t, msg, list_id) {
 	t.get("/1/lists/" + list_id + "/cards", function (err, data) {
@@ -23,12 +24,12 @@ function mainProcess (msg) {
 	var listName = msg.match[1];
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
 	t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
-		var found = _.find(data, function (datum) {return datum.name == listName});
+		var found = _.find(data, function (datum) {return _s(datum.name).trim() === _s(listName).trim()});
 		if (err || !found) {
 			msg.send("ERROR");
 			return;
 		} else {
-			msg.send(listName + "のタスクリスト");
+			msg.send("～ " + listName + "のタスクリスト ～");
 			showTasks(t, msg, found.id);
 		}
 	});
