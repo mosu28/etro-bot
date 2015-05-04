@@ -18,7 +18,7 @@ module.exports = (robot) ->
 				msg.send "ERROT"
 				return
 			for i in [0..data.length]
-				msg.send data[i].name
+				msg.send "id:#{data[i].id} name:#{data[i].name}"
 
 	# robot.hear /test/, (msg) ->
 	# 	objs = [{name: "test"}, {name: "test1"}, {name: "test3"}]
