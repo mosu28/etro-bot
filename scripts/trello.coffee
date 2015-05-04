@@ -13,15 +13,12 @@ module.exports = (robot) ->
 	robot.hear /^etro-bot get list/, (msg) ->
 		Trello = require("node-trello")
 		t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN)
-		list = t.get "/1/boards/#{process.env.HUBOT_TRELLO_BOARD}/lists", (err, data) ->
+		t.get "/1/boards/#{process.env.HUBOT_TRELLO_BOARD}/lists", (err, data) ->
 			if err
-				return "ERROR"
-			return data
-		if list == "ERROR"
-			msg.send "ERROR"
-		else
-			for i in [0..list.length - 1]
-				msg.send list[i]
+				msg.send "ERROT"
+				return
+			for i in [0..data.length]
+				msg.send data[i].name
 
 	# robot.hear /test/, (msg) ->
 	# 	objs = [{name: "test"}, {name: "test1"}, {name: "test3"}]
