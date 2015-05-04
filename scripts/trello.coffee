@@ -20,7 +20,7 @@ module.exports = (robot) ->
 		if lists == "ERROR"
 			msg.send "ERROR"
 		else
-			msg.send lists
+			msg.send "test"
 
 	# robot.hear /test/, (msg) ->
 	# 	obj = {name: "test"}
