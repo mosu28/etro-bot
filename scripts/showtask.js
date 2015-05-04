@@ -8,6 +8,7 @@ var Trello = require("node-trello");
 var _ = require("underscore");
 
 function getList (err, data) {
+	msg.send("test");
 	var res = "";
 	if (err) {
 		return "ERROR";
