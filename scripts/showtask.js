@@ -15,7 +15,7 @@ function mainProcess (msg) {
 			msg.send("ERROR");
 			return;
 		}
-		msg.send(data);
+		msg.send(data + "odj");
 		_.each(data, function (datum) {
 			list += datum.name + " ";
 		});
