@@ -9,8 +9,8 @@ var _ = require("underscore");
 
 function mainProcess (msg) {
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
-	var list = [];
-	list = t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
+	var list;
+	msg.send(t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
 		if (err) {
 			msg.send("ERROR");
 			return;
@@ -20,8 +20,8 @@ function mainProcess (msg) {
 			l.push(datum.name);
 		});
 		return l;
-	});
-	msg.send(list);
+	}));
+	// msg.send(list);
 }
 
 module.exports = function (robot) {
