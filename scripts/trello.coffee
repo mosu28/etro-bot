@@ -21,7 +21,7 @@ module.exports = (robot) ->
 			msg.send "ERROR"
 		else
 			for i in [0..list.length - 1]
-				msg.send list[i].name
+				msg.send list[i]
 
 	# robot.hear /test/, (msg) ->
 	# 	objs = [{name: "test"}, {name: "test1"}, {name: "test3"}]
