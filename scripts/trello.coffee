@@ -21,7 +21,7 @@ module.exports = (robot) ->
 			msg.send "ERROR"
 		else
 			for list in lists
-				msg.send list.name
+				msg.send "#{list.name}"
 
 	# robot.hear /^etro-bot test/, (msg) ->
 	# 	iss = [0, 1, 2, 3, 4]
