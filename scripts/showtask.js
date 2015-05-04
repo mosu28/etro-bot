@@ -9,7 +9,7 @@ var _ = require("underscore");
 
 function mainProcess (msg) {
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
-	var list = "";
+	var global.list = "";
 	t.get("/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/lists", function (err, data) {
 		if (err) {
 			msg.send("ERROR");
@@ -17,10 +17,10 @@ function mainProcess (msg) {
 		}
 		msg.send(data + "odj");
 		_.each(data, function (datum) {
-			list += datum.name + " ";
+			global.list += datum.name + " ";
 		});
 	});
-	msg.send(list);
+	msg.send(global.list);
 }
 
 module.exports = function (robot) {
