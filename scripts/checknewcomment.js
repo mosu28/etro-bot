@@ -28,10 +28,11 @@ function checkNewComment (msg, old, now) {
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
 	t.get(path, function (err, data) {
 		var fs = _.filter(data, function (datum) {return old < datum.date && datum.date <= now});
+		msg.send(fs);
 		if (err) {
 			msg.send("ERROR");
 			return;
-		} else if (!fs) {
+		} else if (fs === null) {
 			msg.send("新しいコメントはありませんでした。");
 		} else {
 			_.each(fs, function (f) {
