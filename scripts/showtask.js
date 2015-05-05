@@ -30,7 +30,7 @@ function mainProcess (msg) {
 			msg.send("ERROR");
 			return;
 		} else if (!found) {
-			msg.send("「" + listName + "」は存在しません。以下のリスト名のいずれかを入力してください。");
+			msg.send("「" + listName + "リスト」は存在しません。以下のリスト名のいずれかを入力してください。");
 			_.each (data, function (datum) {
 				msg.send(datum.name);
 			});
