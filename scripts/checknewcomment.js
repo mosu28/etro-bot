@@ -11,16 +11,17 @@ var _s = require("underscore.string");
 var path = "/1/boards/process.env.HUBOT_TRELLO_BOARD/actions?filter=commentCard&limit=10";
 
 function getDate (n) {
-	var d = new Date();
-	var year = d.getFullYear() + "";
-	var month = _s(d.getMonth() + 1 + "").pad(2, "0").value();
-	var day = _s(d.getDate() + "").pad(2, "0").value();
-	var hour = _s(d.getHours() + "").pad(2, "0").value();
-	var minute = _s(d.getMinutes() - n + "").pad(2, "0").value();
-	var second = _s(d.getSeconds() + "").pad(2, "0").value();
-	var date = _s.join("-", year, month, day);
-	var time = _s.join(":", hour, minute, second) + ".000Z";
-	return date + "T" + time;
+	var now = new Date();
+	var date = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() - n, now.getSeconds(), now.getMilliseconds());
+	var year = date.getFullYear() + "";
+	var month = _s(date.getMonth() + 1 + "").pad(2, "0").value();
+	var day = _s(date.getDate() + "").pad(2, "0").value();
+	var hour = _s(date.getHours() + "").pad(2, "0").value();
+	var minute = _s(date.getMinutes() + "").pad(2, "0").value();
+	var second = _s(date.getSeconds() + "").pad(2, "0").value();
+	var d = _s.join("-", year, month, day);
+	var t = _s.join(":", hour, minute, second) + ".000Z";
+	return d + "T" + t;
 }
 
 function checkNewComment (old, now) {
@@ -44,12 +45,11 @@ function checkNewComment (old, now) {
 }
 
 function mainProcess (msg) {
-	// var now = get(0);
-	// var old = get(N);
+	var now = getDate(0);
+	var old = getDate(N);
 //	checkNewComment(old, now);
-	msg.send("test");
-	// msg.send(now);
-	// msg.send(old);
+	msg.send(now);
+	msg.send(old);
 }
 
 module.exports = function (robot) {
