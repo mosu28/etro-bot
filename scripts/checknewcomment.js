@@ -24,7 +24,7 @@ function getDate (n) {
 	return d + "T" + t;
 }
 
-function checkNewComment (old, now) {
+function checkNewComment (msg, old, now) {
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
 	t.get(path, function (err, data) {
 		var fs = _.filter(data, function (datum) {return old < datum.date && datum.date <= now});
@@ -47,9 +47,7 @@ function checkNewComment (old, now) {
 function mainProcess (msg) {
 	var now = getDate(0);
 	var old = getDate(N);
-//	checkNewComment(old, now);
-	msg.send(now);
-	msg.send(old);
+	checkNewComment(old, now);
 }
 
 module.exports = function (robot) {
