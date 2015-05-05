@@ -35,7 +35,7 @@ function checkNewComment (msg, old, now) {
 			msg.send("新しいコメントはありませんでした。");
 		} else {
 			_.each(fs, function (f) {
-				msg.send(f.memberCreator.fullname + "より新しいコメントがありました。");
+				msg.send(f.memberCreator.fullName + "より新しいコメントがありました。");
 				msg.send("List: " + f.data.list.name);
 				msg.send("Card: " + f.data.card.name);
 				msg.send('Comment: "' + f.data.text + '"');
