@@ -44,12 +44,12 @@ function checkNewComment (old, now) {
 }
 
 function mainProcess (msg) {
-	var now = get(0);
-	var old = get(N);
+	// var now = get(0);
+	// var old = get(N);
 //	checkNewComment(old, now);
 	msg.send("test");
-	msg.send(now);
-	msg.send(old);
+	// msg.send(now);
+	// msg.send(old);
 }
 
 module.exports = function (robot) {
