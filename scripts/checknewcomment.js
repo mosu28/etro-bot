@@ -39,6 +39,7 @@ function checkNewComment (msg, old, now) {
 				msg.send("List: " + f.data.list.name);
 				msg.send("Card: " + f.data.card.name);
 				msg.send('Comment: "' + f.data.text + '"');
+				msg.send("Date: " + f.date);
 			});
 		}
 	});
