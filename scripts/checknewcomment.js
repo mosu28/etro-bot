@@ -53,7 +53,9 @@ function checkNewComment (msg, old, now) {
 function mainProcess (msg) {
 	var now = getDate(0);
 	var old = getDate(N);
-	checkNewComment(msg, old, now);
+	msg.send(now);
+	msg.send(old);
+//	checkNewComment(msg, old, now);
 }
 
 module.exports = function (robot) {
