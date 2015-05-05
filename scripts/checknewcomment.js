@@ -4,7 +4,7 @@
  * Command: check newcomment 後で周期的なイベントにする
  */
 
-var N = 60; //何分前まで見るか
+var N = 15; //何分前まで見るか
 var Trello = require("node-trello");
 var _ = require("underscore");
 var _s = require("underscore.string");
@@ -24,6 +24,8 @@ function getDate (n) {
 	return d + "T" + t;
 }
 
+//TODO 60字ごとに改行を入れる
+
 function checkNewComment (msg, old, now) {
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
 	t.get(path, function (err, data) {
@@ -38,8 +40,9 @@ function checkNewComment (msg, old, now) {
 				// if (i !== 0) {
 				// 	msg.send("-------------------------")
 				// }
-				msg.send("・" + f.memberCreator.fullName + "より新しいコメントがありました。");
-				msg.send("*List:*\t" + f.data.list.name + "\t*Card:*\t" + f.data.card.name);
+				msg.send("---\t" + f.memberCreator.fullName + "より新しいコメントがありました。\t---");
+				msg.send("*List:*\t" + f.data.list.name);
+				msg.send("*Card:*\t" + f.data.card.name);
 				msg.send("*Date:*\t" + f.date);
 				msg.send("*Comment: *\n\t" + f.data.text);
 			});
