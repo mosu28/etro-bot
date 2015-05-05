@@ -8,7 +8,7 @@ var N = 15; //何分前まで見るか
 var Trello = require("node-trello");
 var _ = require("underscore");
 var _s = require("underscore.string");
-var path = "/1/boards/process.env.HUBOT_TRELLO_BOARD/actions?filter=commentCard&limit=10";
+var path = "/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/actions?filter=commentCard&limit=10";
 
 function getDate (n) {
 	var now = new Date();
