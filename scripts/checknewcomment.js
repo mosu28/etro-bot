@@ -51,6 +51,7 @@ function mainProcess (msg) {
 
 module.exports = function (robot) {
 	robot.respond(/check newcomment/i, function (msg) {
+		msg.send("test");
 		mainProcess(msg);
 	});
 }
