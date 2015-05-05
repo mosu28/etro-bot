@@ -31,7 +31,7 @@ function checkNewComment (msg, old, now) {
 		if (err) {
 			msg.send("ERROR");
 			return;
-		} else if (fs === undefined) {
+		} else if (fs == "") {
 			msg.send("新しいコメントはありませんでした。");
 		} else {
 			_.each(fs, function (f) {
