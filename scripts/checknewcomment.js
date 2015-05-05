@@ -40,7 +40,7 @@ function checkNewComment (msg, old, now) {
 				// }
 				msg.send("・" + f.memberCreator.fullName + "より新しいコメントがありました。");
 				msg.send("*Date: *" + f.date);
-				msg.send("*List: *" + f.data.list.name + "\t\t*Card: *" + f.data.card.name);
+				msg.send("*List:* " + f.data.list.name + "\t*Card:* " + f.data.card.name);
 				msg.send("*Comment: *\n\t" + f.data.text);
 			});
 		}
