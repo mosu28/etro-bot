@@ -38,10 +38,10 @@ function checkNewComment (msg, old, now) {
 				// if (i !== 0) {
 				// 	msg.send("-------------------------")
 				// }
-				msg.send("*" + f.memberCreator.fullName + "*より新しいコメントがありました。");
-				msg.send("*List: *\n\t" + f.data.list.name);
-				msg.send("*Card: *\n\t" + f.data.card.name);
-				msg.send('*Comment\n\t: *"' + f.data.text + '"');
+				msg.send(f.memberCreator.fullName + "より新しいコメントがありました。");
+				msg.send("*List: *\n" + f.data.list.name);
+				msg.send("*Card: *\n" + f.data.card.name);
+				msg.send('*Comment: *\n\t"' + f.data.text + '"');
 				msg.send("*Date: *\n\t" + f.date);
 			});
 		}
