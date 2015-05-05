@@ -4,7 +4,7 @@
  * Command: check newcomment 後で周期的なイベントにする
  */
 
-var N = 15; //何分前まで見るか
+var N = 60; //何分前まで見るか
 var Trello = require("node-trello");
 var _ = require("underscore");
 var _s = require("underscore.string");
