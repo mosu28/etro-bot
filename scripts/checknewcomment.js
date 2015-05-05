@@ -34,12 +34,15 @@ function checkNewComment (msg, old, now) {
 		} else if (fs == "") {
 			msg.send("新しいコメントはありませんでした。");
 		} else {
-			_.each(fs, function (f) {
-				msg.send(f.memberCreator.fullName + "より新しいコメントがありました。");
-				msg.send("List: " + f.data.list.name);
-				msg.send("Card: " + f.data.card.name);
-				msg.send('Comment: "' + f.data.text + '"');
-				msg.send("Date: " + f.date);
+			_.each(fs, function (f, i) {
+				// if (i !== 0) {
+				// 	msg.send("-------------------------")
+				// }
+				msg.send("*" + f.memberCreator.fullName + "*より新しいコメントがありました。");
+				msg.send("*List: *\n\t" + f.data.list.name);
+				msg.send("*Card: *\n\t" + f.data.card.name);
+				msg.send('*Comment\n\t: *"' + f.data.text + '"');
+				msg.send("*Date: *\n\t" + f.date);
 			});
 		}
 	});
