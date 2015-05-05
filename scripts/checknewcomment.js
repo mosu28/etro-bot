@@ -46,12 +46,13 @@ function checkNewComment (old, now) {
 function mainProcess (msg) {
 	var now = get(0);
 	var old = get(N);
-	checkNewComment(old, now);
+//	checkNewComment(old, now);
+	msg.send(now);
+	msg.send(old);
 }
 
 module.exports = function (robot) {
 	robot.respond(/check newcomment/i, function (msg) {
-		msg.send("test");
 		mainProcess(msg);
 	});
 }
