@@ -52,20 +52,17 @@ function checkNewComment (robot, old, now) {
 			return old < datum.date && datum.date <= now
 		});
 		if (err) {
-			robot.send(channel,"ERROR");
+			robot.send(channel, "ERROR");
 			return;
 		} else if (fs == "") {
-			robot.send(channel,"新しいコメントはありませんでした。");
+			robot.send(channel, "新しいコメントはありませんでした。");
 		} else {
 			_.each(fs, function (f, i) {
-				// if (i !== 0) {
-				// 	robot.send(channel,"-------------------------")
-				// }
-				robot.send(channel,"---\t" + f.memberCreator.fullName + "より新しいコメントがありました。\t---");
-				robot.send(channel,"*List:*\t" + f.data.list.name);
-				robot.send(channel,"*Card:*\t" + f.data.card.name);
-				robot.send(channel,"*Date:*\t" + formatDate(f.date));
-				robot.send(channel,"*Comment: *\n\t" + f.data.text);
+				robot.send(channel, "---\t" + f.memberCreator.fullName + "より新しいコメントがありました。\t---");
+				robot.send(channel, "*List:*\t" + f.data.list.name);
+				robot.send(channel, "*Card:*\t" + f.data.card.name);
+				robot.send(channel, "*Date:*\t" + formatDate(f.date));
+				robot.send(channel, "*Comment: *\n\t" + f.data.text);
 			});
 		}
 	});
@@ -78,7 +75,7 @@ function mainProcess (robot) {
 }
 
 module.exports = function (robot) {
-	var cronjob = cron.job("*/" + (N * 60) + " * * * * *", function () {
+	var cronjob = cron.job("0 */" + N + " * * * *", function () {
 		mainProcess(robot);
 	});
 	robot.respond(/check start/i, function () {
@@ -87,6 +84,6 @@ module.exports = function (robot) {
 	});
 	robot.respond(/check stop/i, function () {
 		cronjob.stop();
-		robot.send(channel, "------- 「更新チェック機能」を終了します -------");
+		robot.send(channel, "-------- 「更新チェック機能」を終了します --------");
 	});
 }
