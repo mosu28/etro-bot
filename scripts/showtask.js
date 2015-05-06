@@ -14,7 +14,7 @@ function showTasks (t, msg, list_id) {
 			return;
 		}
 		_.each(data, function (datum) {
-			msg.send(datum.name);
+			msg.send("\t・" + datum.name);
 		});
 	});
 }
