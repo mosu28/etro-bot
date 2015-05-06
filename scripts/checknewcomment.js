@@ -62,7 +62,7 @@ function checkNewComment (msg, old, now) {
 				msg.send("---\t" + f.memberCreator.fullName + "より新しいコメントがありました。\t---");
 				msg.send("*List:*\t" + f.data.list.name);
 				msg.send("*Card:*\t" + f.data.card.name);
-				msg.send("*Date:*\t" + formatDate(f.date));
+				msg.send("*Date:*\t" + f.date);
 				msg.send("*Comment: *\n\t" + f.data.text);
 			});
 		}
