@@ -32,7 +32,7 @@ function formatDate (date) {
 	temp = _s.words(temp[1], ".");
 	ts = _s.words(temp[0], ":");
 	ms = temp[1].replace(/Z*/g, "");
-	var d = new Date(parseInt(ds[0]),parseInt(ds[1]),parseInt(ds[2]),parseInt(ts[0]),parseInt(ts[1]),parseInt(ts[2]),parseInt(ms));
+	var d = new Date(parseInt(ds[0]),parseInt(ds[1]) - 1,parseInt(ds[2]),parseInt(ts[0]) + 9,parseInt(ts[1]),parseInt(ts[2]),parseInt(ms));
 	var year = d.getFullYear() + "";
 	var month = _s(d.getMonth() + 1 + "").pad(2, "0").value();
 	var day = _s(d.getDate() + "").pad(2, "0").value();
