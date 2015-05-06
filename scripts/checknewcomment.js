@@ -8,7 +8,9 @@ var N = 15; //何分前まで見るか
 var Trello = require("node-trello");
 var _ = require("underscore");
 var _s = require("underscore.string");
+var cron = require("cron");
 var path = "/1/boards/" + process.env.HUBOT_TRELLO_BOARD + "/actions?filter=commentCard&limit=10";
+var channel = {room: "enter-and-leave"};
 
 function getDate (n) {
 	var now = new Date();
@@ -43,40 +45,46 @@ function formatDate (date) {
 	return _s.join("-", year, month, day) + "T" + _s.join(":", hour, minute, second) + "." + ms + "Z";
 }
 
-function checkNewComment (msg, old, now) {
+function checkNewComment (robot, old, now) {
 	var t = new Trello(process.env.HUBOT_TRELLO_KEY, process.env.HUBOT_TRELLO_TOKEN);
 	t.get(path, function (err, data) {
 		var fs = _.filter(data, function (datum) {
 			return old < datum.date && datum.date <= now
 		});
 		if (err) {
-			msg.send("ERROR");
+			robot.send(channel,"ERROR");
 			return;
 		} else if (fs == "") {
-			msg.send("新しいコメントはありませんでした。");
+			robot.send(channel,"新しいコメントはありませんでした。");
 		} else {
 			_.each(fs, function (f, i) {
 				// if (i !== 0) {
-				// 	msg.send("-------------------------")
+				// 	robot.send(channel,"-------------------------")
 				// }
-				msg.send("---\t" + f.memberCreator.fullName + "より新しいコメントがありました。\t---");
-				msg.send("*List:*\t" + f.data.list.name);
-				msg.send("*Card:*\t" + f.data.card.name);
-				msg.send("*Date:*\t" + formatDate(f.date));
-				msg.send("*Comment: *\n\t" + f.data.text);
+				robot.send(channel,"---\t" + f.memberCreator.fullName + "より新しいコメントがありました。\t---");
+				robot.send(channel,"*List:*\t" + f.data.list.name);
+				robot.send(channel,"*Card:*\t" + f.data.card.name);
+				robot.send(channel,"*Date:*\t" + formatDate(f.date));
+				robot.send(channel,"*Comment: *\n\t" + f.data.text);
 			});
 		}
 	});
 }
 
-function mainProcess (msg) {
+function mainProcess (robot) {
 	var now = getDate(0);
 	var old = getDate(N);
-	checkNewComment(msg, old, now);
+	checkNewComment(robot, old, now);
 }
 
 module.exports = function (robot) {
-	robot.respond(/check/i, function (msg) {
-		mainProcess(msg);
+	var cronjob = cron.job("*/" + 60/*(N * 60)*/ + " * * * * *", function () {
+		mainProcess(robot);
+	});
+	robot.respond(/check start/i, function () {
+		cronjob.start();
+	});
+	robot.respond(/check stop/i, function () {
+		cronjob.stop();
 	});
 }
