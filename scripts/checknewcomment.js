@@ -75,12 +75,12 @@ function mainProcess (robot) {
 }
 
 module.exports = function (robot) {
-	var cronjob = cron.job("0 */" + N + " * * * *", function () {
+	var cronjob = cron.job("/10 *" +/* N + */" * * * *", function () {
 		mainProcess(robot);
 	});
 	robot.respond(/check start/i, function () {
 		cronjob.start();
-		robot.send(channel, "--- 「更新チェック機能」を起動します(" + N + "分おき) ---");
+		robot.send(channel, "--- 「更新チェック機能」を起動します(" + /*+ N + */"10秒おき) ---");
 	});
 	robot.respond(/check stop/i, function () {
 		cronjob.stop();
