@@ -80,7 +80,7 @@ module.exports = function (robot) {
 	});
 	robot.respond(/check start/i, function () {
 		cronjob.start();
-		robot.send(channel, "--- 「更新チェック機能」を起動します(10秒おき) ---");
+		robot.send(channel, "--- 「更新チェック機能」を起動します(" + N  + "分おき) ---");
 	});
 	robot.respond(/check stop/i, function () {
 		cronjob.stop();
