@@ -75,7 +75,7 @@ function mainProcess (robot) {
 }
 
 module.exports = function (robot) {
-	var cronjob = cron.job("*/10 * * * * *", function () {
+	var cronjob = cron.job("0 */" + N + " * * * *", function () {
 		mainProcess(robot);
 	});
 	robot.respond(/check start/i, function () {
